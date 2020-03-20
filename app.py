@@ -7,3 +7,6 @@ app = Flask(__name__)
 def hello_world():
     token = get_access_token()
     return {"token": token}, 200
+
+if __name__ == '__main__':
+    app.run()
