@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, request
 from service_account import get_access_token
 from flask_cors import CORS
 app = Flask(__name__)
@@ -6,8 +6,8 @@ CORS(app)
 
 @app.route('/')
 def home():
-    response = {"edemocracia": url_for('token_edemocracia'),
-                "enquetes": li('token_enquetes'),}, 200
+    response = {"edemocracia": request.url_root+'edemocracia',
+                "enquetes": request.url_root+'edemocracia'}, 200
     return response
 
 
@@ -24,4 +24,4 @@ def token_enquetes():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
