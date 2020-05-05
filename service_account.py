@@ -1,6 +1,7 @@
 # service-account.py
 
 from oauth2client.service_account import ServiceAccountCredentials
+from oauth2client.client import HttpAccessTokenRefreshError
 
 # The scope for the OAuth2 request.
 SCOPE = 'https://www.googleapis.com/auth/analytics.readonly'
@@ -19,5 +20,12 @@ def get_access_token(account: str) -> str:
     else:
         KEY_FILEPATH = ''
 
-    return ServiceAccountCredentials.from_json_keyfile_name(
-        KEY_FILEPATH, SCOPE).get_access_token().access_token
+    try:
+        token = ServiceAccountCredentials.from_json_keyfile_name(
+            KEY_FILEPATH, SCOPE).get_access_token().access_token
+    except HttpAccessTokenRefreshError:
+        token = 'Account not have permission'
+    except Exception:
+        token = 'Error token'
+    
+    return token

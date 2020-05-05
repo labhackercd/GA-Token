@@ -7,7 +7,7 @@ CORS(app)
 @app.route('/')
 def home():
     response = {"edemocracia": request.url_root+'edemocracia',
-                "enquetes": request.url_root+'edemocracia'}, 200
+                "enquetes": request.url_root+'enquetes'}, 200
     return response
 
 
