@@ -4,20 +4,20 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
+@app.route('/ga-token/')
 def home():
-    response = {"edemocracia": request.url_root+'edemocracia',
-                "enquetes": request.url_root+'enquetes'}, 200
+    response = {"edemocracia": request.url_root+'ga-token/edemocracia',
+                "enquetes": request.url_root+'ga-token/enquetes'}, 200
     return response
 
 
-@app.route('/edemocracia')
+@app.route('/ga-token/edemocracia')
 def token_edemocracia():
     token = get_access_token('edemocracia')
     return {"token": token}, 200
 
 
-@app.route('/enquetes')
+@app.route('/ga-token/enquetes')
 def token_enquetes():
     token = get_access_token('enquetes')
     return {"token": token}, 200
